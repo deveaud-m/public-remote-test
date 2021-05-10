@@ -1,0 +1,20 @@
+variables:
+    http_proxy: $CODE_PROXY
+    https_proxy: $CODE_PROXY
+    no_proxy: code.siemens.com,docker.siemens.com
+
+pull_remote:
+    variables:
+        PUBLIC_ORIGIN: "git@github.com:deveaud-m/public-remote-test.git"
+    before_script:
+        # Configure access to the public repository inside the build environment
+        # The private key is retrieved from the CI/CD variables
+        - eval $(ssh-agent -s)
+        - echo "$GH_DEPLOY_KEY" | tr -d '\r' | ssh-add -
+        - mkdir -p ~/.ssh
+        - chmod 700 ~/.ssh
+        - ssh git@github.com
+    script:
+        - git remote add public $PUBLIC_ORIGIN
+        - git log public
+        - git pull public
