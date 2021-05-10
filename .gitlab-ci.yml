@@ -9,4 +9,4 @@ pull_remote:
     script:
         - git remote add public $PUBLIC_ORIGIN
         - git fetch public
-        - git log origin/master..public/master && echo "New commits found in the public project"
+        - git log origin/master..public/master && git merge public/master --allow-unrelated-histories --no-commit
