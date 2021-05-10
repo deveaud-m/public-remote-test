@@ -8,7 +8,5 @@ pull_remote:
         PUBLIC_ORIGIN: "https://deveaud-m:$GITHUB_REPOSITORY_TOKEN@github.com/deveaud-m/public-remote-test.git"
     script:
         - git remote add public $PUBLIC_ORIGIN
-        - git remote -v
-        - git branch -a
         - git fetch public
-        - git log public/master
+        - git log origin/master..public/master && echo "New commits found in the public project"
