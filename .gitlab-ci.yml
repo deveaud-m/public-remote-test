@@ -5,15 +5,7 @@ variables:
 
 pull_remote:
     variables:
-        PUBLIC_ORIGIN: "git@github.com:deveaud-m/public-remote-test.git"
-    before_script:
-        # Configure access to the public repository inside the build environment
-        # The private key is retrieved from the CI/CD variables
-        - eval $(ssh-agent -s)
-        - echo "$GH_DEPLOY_KEY_PRIVATE" | tr -d '\r' | ssh-add -
-        - mkdir -p ~/.ssh
-        - chmod 700 ~/.ssh
-        - echo "$GH_DEPLOY_KEY" > ~/.ssh/id_rsa.pub
+        PUBLIC_ORIGIN: "https://deveaud-m:$GITHUB_REPOSITORY_TOKEN@github.com/deveaud-m/public-remote-test.git"
     script:
         - git remote add public $PUBLIC_ORIGIN
         - git remote -v
