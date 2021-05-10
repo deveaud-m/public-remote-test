@@ -10,9 +10,10 @@ pull_remote:
         # Configure access to the public repository inside the build environment
         # The private key is retrieved from the CI/CD variables
         - eval $(ssh-agent -s)
-        - echo "$GH_DEPLOY_KEY" | tr -d '\r' | ssh-add -
+        - echo "$GH_DEPLOY_KEY_PRIVATE" | tr -d '\r' | ssh-add -
         - mkdir -p ~/.ssh
         - chmod 700 ~/.ssh
+        - echo "$GH_DEPLOY_KEY" > ~/.ssh/id_rsa.pub
     script:
         - git remote add public $PUBLIC_ORIGIN
         - git remote -v
