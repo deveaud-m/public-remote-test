@@ -12,4 +12,7 @@ pull_remote:
     script:
         - git remote add public $PUBLIC_ORIGIN
         - git fetch public
-        - git log origin/master..public/master && git merge public/master --allow-unrelated-histories --no-commit
+        # Try to automatically merge commits from the public project into this project
+        # If merge conflict arise, the job will fail 
+        - git log origin/master..public/master && git merge public/master --allow-unrelated-histories
+        - git log
