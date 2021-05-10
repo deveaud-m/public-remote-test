@@ -15,5 +15,6 @@ pull_remote:
         - chmod 700 ~/.ssh
     script:
         - git remote add public $PUBLIC_ORIGIN
-        - git log public
+        - git remove -v
+        - git log public/master
         - git pull public
