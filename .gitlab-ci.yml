@@ -16,5 +16,6 @@ pull_remote:
     script:
         - git remote add public $PUBLIC_ORIGIN
         - git remote -v
+        - git branch -a
+        - git fetch public
         - git log public/master
-        - git pull public
