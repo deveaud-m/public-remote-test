@@ -16,4 +16,4 @@ pull_remote:
         # If merge conflict arise, the job will fail 
         - git log origin/master..public/master && git merge public/master --allow-unrelated-histories
         - git log
-        - git push origin HEAD:master -o skip.ci
+        - git push -o skip.ci "https://push-token:$PUSH_TOKEN@code.siemens.com/marion.deveaud/public-remote-test.git" HEAD:master
