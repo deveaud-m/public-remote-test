@@ -16,4 +16,4 @@ pull_remote:
         # If merge conflict arise, the job will fail 
         - git log origin/master..public/master && git merge public/master --allow-unrelated-histories
         - git log
-        - git push -o skip.ci
+        - git push origin HEAD:master -o skip.ci
