@@ -1,0 +1,37 @@
+name: push-to-remote
+on:
+  push:
+    branches:
+      - master
+jobs:
+  push-to-remote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create SSH key
+        run: |
+          mkdir -p ~/.ssh/
+          chmod 700 ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          cat <<EOF >> ~/.ssh/config
+          Host $SSH_HOST
+            User git
+            Hostname $SSH_HOST
+            IdentityFile ~/.ssh/deploy_key
+            IdentitiesOnly yes
+          EOF
+          ssh-keyscan -H "$SSH_HOST" > ~/.ssh/known_hosts
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+      - name: Push to remote
+        run: |
+          git remote add private git@$SSH_HOST:$PRIVATE_REPO
+          git fetch --unshallow origin
+          git push -u private deploy
+        shell: bash
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          PRIVATE_REPO: ${{ secrets.PRIVATE_REPO }}
