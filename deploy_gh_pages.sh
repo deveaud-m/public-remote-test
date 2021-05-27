@@ -1,14 +1,12 @@
 #!/bin/bash
 
 function deploy_gh_pages {
-    mkdir -p site/
-    cd site
     git checkout -b gh-pages public/gh-pages
     # Build you static site here
-    cp ../src/* ./
-    git add ./*
+    cp src/* docs/
+    git add docs/*
     git commit -m "docs(pages): update external static site"
-    git push -u public gh-pages
+    git push
 }
 
 if [[ ! $PUBLIC_ORIGIN ]];
