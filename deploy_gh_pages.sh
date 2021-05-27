@@ -1,7 +1,6 @@
 #!/bin/bash
 
 function deploy_gh_pages {
-    mkdir -p docs/
     git checkout -b gh-pages public/gh-pages
     # Build you static site here
     cp src/* docs/
