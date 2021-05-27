@@ -25,5 +25,5 @@ if [ "${new_commit}" -gt 0 ]; then
     deploy_gh_pages
 else
     echo "Nothing changed in the remote repository, nothing to do."
-    exit 1
+    exit 0
 fi
