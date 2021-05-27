@@ -1,6 +1,8 @@
 #!/bin/bash
 
 function deploy_gh_pages {
+    mkdir -p site/
+    cp src/* site/
     git add site
     git commit -m "docs(pages): publish new version of the website"
     git subtree push --prefix site public gh-pages
