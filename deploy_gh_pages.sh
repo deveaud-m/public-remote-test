@@ -1,11 +1,14 @@
 #!/bin/bash
 
 function deploy_gh_pages {
-    git checkout -b gh-pages public/gh-pages
+    mkdir -p docs
     # Build you static site here
+    # Use a more specific commit message
     cp src/* docs/
     git add docs/*
     git commit -m "docs(pages): update external static site"
+    git checkout -b gh-pages public/gh-pages
+    git cherry-pick -X theirs master
     git push
 }
 
