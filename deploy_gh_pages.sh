@@ -5,9 +5,11 @@ function deploy_gh_pages {
     # Build you static site here
     cp src/* docs/
     git add docs/*
+    git status
     git commit -m "docs(pages): update external static site from ${CI_JOB_ID}"
+    git log
     git checkout -b gh-pages public/gh-pages
-    git cherry-pick -X theirs deploy
+    git cherry-pick -X theirs public/master
     git push
 }
 
