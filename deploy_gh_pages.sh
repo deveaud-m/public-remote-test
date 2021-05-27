@@ -3,9 +3,11 @@
 function deploy_gh_pages {
     mkdir -p site/
     cp src/* site/
-    git add site
-    git commit -m "docs(pages): publish new version of the website"
-    git subtree push --prefix site public gh-pages
+    cd site
+    git checkout public/gh-pages
+    git add ./*
+    git commit -m "docs(pages): update external static site"
+    git push
 }
 
 if [[ ! $PUBLIC_ORIGIN ]];
