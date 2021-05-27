@@ -14,6 +14,7 @@ git branch -a
 new_commit=$(git log origin/master..public/master | wc -l)
 if [ "${new_commit}" -gt 0 ]; then
     echo "New commits where found on the remote master branch, deploy pages from job ${CI_JOB_ID}"
+    git checkout origin/deploy
     mkdir -p docs
     # Build you static site here
     cp src/* docs/
