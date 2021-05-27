@@ -2,11 +2,9 @@
 
 function deploy_gh_pages {
     mkdir -p docs/
+    git checkout -b gh-pages public/gh-pages
     # Build you static site here
     cp src/* docs/
-    ls -l docs/
-    cat docs/index.html
-    git checkout -b gh-pages public/gh-pages
     git add docs/*
     git commit -m "docs(pages): update external static site"
     git push
