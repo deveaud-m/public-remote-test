@@ -1,0 +1,25 @@
+site_name: My Siemens Docs
+
+site_description: Demonstrate how to sync changes between public and internal repositories
+site_author: Marion
+site_url: 'https://deveaud-m.github.io/public-remote-test/'
+
+repo_name: deveaud-m/public-remote-test/
+repo_url: https://github.com/deveaud-m/public-remote-test/
+edit_uri: 'edit/master/src/'
+
+docs_dir: 'src'
+
+theme:
+  name: 'code-siemens-code-docs-theme'
+  palette:
+    primary: 'teal'
+    accent: 'teal'
+  language: 'en'
+  feature:
+    tabs: true
+  logo:
+    icon: '\uE80C'
+
+extra:
+  community:

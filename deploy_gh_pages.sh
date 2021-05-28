@@ -15,12 +15,10 @@ new_commit=$(git log origin/master..public/master | wc -l)
 if [ "${new_commit}" -gt 0 ]; then
     echo "New commits where found on the remote master branch, deploy pages from job ${CI_JOB_ID}"
     git checkout -b deploy origin/deploy
-    mkdir -p docs
-    # Build you static site here
-    cp src/* docs/
+    # Build your mkdocs site
+    poetry run mkdocs build -d docs/
     git add docs/*
     git commit -m "docs(pages): update external static site from ${CI_JOB_ID}"
-    git log -n 5 --format=short
     git checkout -b gh-pages public/gh-pages
     git merge -X theirs deploy
     git push

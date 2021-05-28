@@ -1,7 +1,11 @@
+image: docker.siemens.com/code-ops/poetry-docker:1.1-py3.9
+
 variables:
     http_proxy: $CODE_PROXY
     https_proxy: $CODE_PROXY
     no_proxy: code.siemens.com,docker.siemens.com
+    POETRY_HTTP_BASIC_MKDOCS_USERNAME: gitlab-ci-token
+    POETRY_HTTP_BASIC_MKDOCS_PASSWORD: $CI_JOB_TOKEN
 
 # Deploy external website
 gh-pages:
@@ -12,5 +16,6 @@ gh-pages:
     before_script:
         - git config --global user.email "marion.deveaud@siemens.com"
         - git config --global user.name "Marion Deveaud"
+        - poetry install --no-root -n
     script:
         - ./deploy_gh_pages.sh
