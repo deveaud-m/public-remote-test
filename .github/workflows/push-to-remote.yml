@@ -30,7 +30,7 @@ jobs:
         run: |
           git remote add private git@$SSH_HOST:$PRIVATE_REPO
           git fetch --unshallow private
-          git switch -c origin deploy
+          git switch -c deploy
           git push -f private deploy
         shell: bash
         env:
