@@ -25,14 +25,11 @@ update:
         - git remote add public $PUBLIC_ORIGIN
         - ./fetch_remote.sh
 
-# Deploy website
 build_pages:
     stage: build
-    needs:
-    - job: update
-      optional: true
     rules:
         - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+        - if: $CI_COMMIT_BRANCH == "deploy"
     script:
         - poetry install --no-root -n
         - poetry run mkdocs build -d docs/
