@@ -30,8 +30,8 @@ update:
             fi
 
 # Deploy website
-pages:
-    stage: deploy
+build_pages:
+    stage: build
     rules:
         - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
     script:
@@ -40,3 +40,11 @@ pages:
     artifacts:
         paths:
         - docs/
+
+pages:
+  stage: deploy
+  script:
+    - mv docs/ public/
+  artifacts:
+    paths:
+      - public/
