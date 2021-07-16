@@ -6,7 +6,7 @@ variables:
     no_proxy: code.siemens.com,docker.siemens.com
     POETRY_HTTP_BASIC_MKDOCS_USERNAME: gitlab-ci-token
     POETRY_HTTP_BASIC_MKDOCS_PASSWORD: $CI_JOB_TOKEN
-    FF_ENABLE_BASH_EXIT_CODE_CHECK: "true"
+    FF_USE_NEW_BASH_EVAL_STRATEGY: "true"
 
 stages:
     - fetch
