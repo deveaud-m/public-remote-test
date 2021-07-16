@@ -33,7 +33,7 @@ jobs:
           git switch -c deploy
           git status
           git log
-          git push -f private deploy
+          git push private/deploy
         shell: bash
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
