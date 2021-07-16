@@ -17,6 +17,7 @@ update:
     stage: fetch
     rules:
         - if: $CI_PIPELINE_SOURCE == "schedule"
+          allow_failure: true
     variables:
         PUBLIC_ORIGIN: "https://github.com/deveaud-m/public-remote-test.git"
     script:
@@ -27,6 +28,9 @@ update:
 # Deploy website
 build_pages:
     stage: build
+    needs:
+    - job: update
+      optional: true
     rules:
         - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
     script:
