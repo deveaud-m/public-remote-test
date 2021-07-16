@@ -6,7 +6,6 @@ variables:
     no_proxy: code.siemens.com,docker.siemens.com
     POETRY_HTTP_BASIC_MKDOCS_USERNAME: gitlab-ci-token
     POETRY_HTTP_BASIC_MKDOCS_PASSWORD: $CI_JOB_TOKEN
-    FF_USE_NEW_BASH_EVAL_STRATEGY: "true"
 
 stages:
     - fetch
@@ -25,7 +24,6 @@ update:
         # Fetch branches from the remote public project
         - git remote add public $PUBLIC_ORIGIN
         - ./fetch_remote.sh
-        - echo $?
 
 # Deploy website
 build_pages:
