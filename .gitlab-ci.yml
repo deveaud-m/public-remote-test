@@ -18,7 +18,7 @@ update:
     rules:
         - if: $CI_PIPELINE_SOURCE == "schedule"
     variables:
-        PUBLIC_ORIGIN: "https://$MAINTAINER_GITHUB_ACCOUNT:$GITHUB_REPOSITORY_TOKEN@$PUBLIC_GITHUB_REPOSITORY"
+        PUBLIC_ORIGIN: "https://github.com/deveaud-m/public-remote-test.git"
     script:
         # Fetch branches from the remote public project
         - git remote add public $PUBLIC_ORIGIN
