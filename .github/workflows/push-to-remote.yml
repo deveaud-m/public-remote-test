@@ -29,8 +29,7 @@ jobs:
       - name: Push to remote
         run: |
           git remote add private git@$SSH_HOST:$PRIVATE_REPO
-          git fetch --unshallow private
-          git push -u private deploy
+          git push -u private main
         shell: bash
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
