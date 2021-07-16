@@ -38,6 +38,5 @@ pages:
         - poetry install --no-root -n
         - poetry run mkdocs build -d docs/
     artifacts:
-        expire_in: 2d
         paths:
         - docs/
