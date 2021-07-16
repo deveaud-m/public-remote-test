@@ -30,6 +30,8 @@ jobs:
         run: |
           git remote add private git@$SSH_HOST:$PRIVATE_REPO
           git fetch private
+          git config --global user.email "marion.deveaud@siemens.com"
+          git config --global user.name "Marion Deveaud"
           git merge --allow-unrelated-histories private/main
           git push -u private main
         shell: bash
