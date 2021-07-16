@@ -31,6 +31,8 @@ jobs:
           git remote add private git@$SSH_HOST:$PRIVATE_REPO
           git fetch --unshallow private
           git switch -c deploy
+          git status
+          git log
           git push -f private deploy
         shell: bash
         env:
