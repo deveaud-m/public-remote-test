@@ -24,6 +24,7 @@ update:
         # Fetch branches from the remote public project
         - git remote add public $PUBLIC_ORIGIN
         - ./fetch_remote.sh
+        - echo $?
 
 # Deploy website
 build_pages:
