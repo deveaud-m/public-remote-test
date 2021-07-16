@@ -7,9 +7,14 @@ variables:
     POETRY_HTTP_BASIC_MKDOCS_USERNAME: gitlab-ci-token
     POETRY_HTTP_BASIC_MKDOCS_PASSWORD: $CI_JOB_TOKEN
 
+stages:
+    - fetch
+    - build
+    - deploy
+
 # Fetch new commits from public repository
 update:
-    stage: build
+    stage: fetch
     rules:
         - if: $CI_PIPELINE_SOURCE == "schedule"
     variables:
