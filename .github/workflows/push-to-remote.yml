@@ -29,11 +29,7 @@ jobs:
       - name: Push to remote
         run: |
           git remote add private git@$SSH_HOST:$PRIVATE_REPO
-          git fetch --unshallow private
-          git config --global user.email "marion.deveaud@siemens.com"
-          git config --global user.name "Marion Deveaud"
-          git merge --allow-unrelated-histories private/main -s ours
-          git push -u private main
+          git push -f -u private main
         shell: bash
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
