@@ -11,7 +11,7 @@ variables:
 update:
     stage: build
     rules:
-        - if: $CI_PIPELINE_SOURCE == "schedules"
+        - if: $CI_PIPELINE_SOURCE == "schedule"
     variables:
         PUBLIC_ORIGIN: "https://$MAINTAINER_GITHUB_ACCOUNT:$GITHUB_REPOSITORY_TOKEN@$PUBLIC_GITHUB_REPOSITORY"
     script:
