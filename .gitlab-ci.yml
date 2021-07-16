@@ -22,7 +22,7 @@ update:
     script:
         # Fetch branches from the remote public project
         - git remote add public $PUBLIC_ORIGIN
-        - fetch_remote.sh
+        - ./fetch_remote.sh
 
 # Deploy website
 build_pages:
