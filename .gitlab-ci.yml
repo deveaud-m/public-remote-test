@@ -20,6 +20,20 @@ update:
           allow_failure: true
     variables:
         PUBLIC_ORIGIN: "https://github.com/deveaud-m/public-remote-test.git"
+    before_script:
+        - |
+          mkdir -p ~/.ssh/
+          chmod 700 ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          cat <<EOF >> ~/.ssh/config
+          Host $GITLAB_HOST
+            User git
+            Hostname $GITLAB_HOST
+            IdentityFile ~/.ssh/deploy_key
+            IdentitiesOnly yes
+          EOF
+          ssh-keyscan -H "code.siemens.com" > ~/.ssh/known_hosts
     script:
         # Fetch branches from the remote public project
         - git remote add public $PUBLIC_ORIGIN
@@ -27,8 +41,10 @@ update:
         - git branch -a
         - new_commit=$(git log origin/main..public/main | wc -l)
         - |
-            if [ "${new_commit}" -gt 0 ]; then 
-                echo "New commits where found on the remote master branch, build and deploy new website"
+            if [ "${new_commit}" -gt 0 ]; then
+                echo "New commits where found on the remote master branch, push to local 'deploy' branch"
+                git remote rm origin
+                git remote add origin "git@$GITLAB_HOST:$CI_PROJECT_PATH.git"
                 git checkout -b deploy public/main
                 git push -u origin deploy
             else
