@@ -23,7 +23,18 @@ update:
     script:
         # Fetch branches from the remote public project
         - git remote add public $PUBLIC_ORIGIN
-        - ./fetch_remote.sh
+        - git fetch public
+        - git branch -a
+        - new_commit=$(git log origin/main..public/main | wc -l)
+        - |
+            if [ "${new_commit}" -gt 0 ]; then 
+                echo "New commits where found on the remote master branch, build and deploy new website"
+                git switch -c public/main deploy
+                git push -u origin deploy
+            else
+                echo "No new commits where found on the remote master branch, exit pipeline"
+                exit 1
+            fi
 
 build_pages:
     stage: build
