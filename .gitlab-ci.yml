@@ -20,7 +20,7 @@ update:
     variables:
         PUBLIC_ORIGIN: "https://github.com/deveaud-m/public-remote-test.git"
     before_script:
-        - apk update && apk add openssh git
+        - apt update && apt install -y openssh-client git
         - mkdir -p ~/.ssh/ && chmod 700 ~/.ssh
         - ssh-keyscan -H "code.siemens.com" > ~/.ssh/known_hosts
         - echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key && chmod 600 ~/.ssh/deploy_key
