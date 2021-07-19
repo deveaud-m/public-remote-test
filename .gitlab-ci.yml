@@ -20,19 +20,6 @@ update:
     variables:
         PUBLIC_ORIGIN: "https://github.com/deveaud-m/public-remote-test.git"
     before_script:
-        - apt update && apt install -y openssh-client git
-        - mkdir -p ~/.ssh/ && chmod 700 ~/.ssh
-        - ssh-keyscan -H "code.siemens.com" > ~/.ssh/known_hosts
-        - echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key && chmod 600 ~/.ssh/deploy_key
-        - |
-            cat <<EOF >> ~/.ssh/config
-            Host $GITLAB_HOST
-                User git
-                Hostname $GITLAB_HOST
-                IdentityFile ~/.ssh/deploy_key
-                IdentitiesOnly yes
-            EOF
-    script:
         - git remote add public $PUBLIC_ORIGIN
         - git fetch public
         - new_commits=$(git log origin/main..public/main | wc -l)
@@ -40,12 +27,13 @@ update:
             if [ "${new_commits}" -gt 0 ]; then
                 echo "New commits where found on the remote main branch, build and deploy mkdocs"
                 git checkout -b deploy public/main
-                poetry install --no-root -n
-                poetry run mkdocs build -d docs/
             else
                 echo "No new commits where found on the remote master branch, exit pipeline"
                 exit 1
             fi
+    script:
+        - poetry install --no-root -n
+        - poetry run mkdocs build -d docs/
     artifacts:
         paths:
         - docs/
