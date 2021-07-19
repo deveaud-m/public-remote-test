@@ -15,6 +15,7 @@ stages:
 # Fetch new commits from public repository
 update:
     stage: fetch
+    image: debian:buster
     rules:
         - if: $CI_PIPELINE_SOURCE == "schedule"
           allow_failure: true
