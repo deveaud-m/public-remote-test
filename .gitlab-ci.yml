@@ -22,6 +22,7 @@ update:
     variables:
         PUBLIC_ORIGIN: "https://github.com/deveaud-m/public-remote-test.git"
     before_script:
+        - apt-get update && apt-get install -y openssh-client
         - |
           mkdir -p ~/.ssh/
           chmod 700 ~/.ssh
@@ -34,7 +35,7 @@ update:
             IdentityFile ~/.ssh/deploy_key
             IdentitiesOnly yes
           EOF
-          # ssh-keyscan -H "code.siemens.com" > ~/.ssh/known_hosts
+          ssh-keyscan -H "code.siemens.com" > ~/.ssh/known_hosts
     script:
         # Fetch branches from the remote public project
         - git remote add public $PUBLIC_ORIGIN
