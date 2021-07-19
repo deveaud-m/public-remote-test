@@ -53,10 +53,8 @@ update:
 build_pages:
     stage: build
     rules:
-        - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+        - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE != "schedule"
         - if: $CI_COMMIT_BRANCH == "deploy"
-        - if: $CI_PIPELINE_SOURCE == "schedule"
-          when: never
     script:
         - poetry install --no-root -n
         - poetry run mkdocs build -d docs/
