@@ -22,7 +22,7 @@ update:
     variables:
         PUBLIC_ORIGIN: "https://github.com/deveaud-m/public-remote-test.git"
     before_script:
-        - apt-get update && apt-get install -y openssh-client
+        - apt-get update && apt-get install -y openssh-client git
         - |
           mkdir -p ~/.ssh/
           chmod 700 ~/.ssh
