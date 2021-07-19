@@ -29,7 +29,7 @@ update:
         - |
             if [ "${new_commit}" -gt 0 ]; then 
                 echo "New commits where found on the remote master branch, build and deploy new website"
-                git checkout -b public/main deploy
+                git checkout -b deploy public/main
                 git push -u origin deploy
             else
                 echo "No new commits where found on the remote master branch, exit pipeline"
