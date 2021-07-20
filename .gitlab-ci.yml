@@ -45,12 +45,7 @@ mkdocs:
 
 pages:
   stage: deploy
-  needs:
-    - job: update
-      artifacts: true
-      optional: true
-    - job: mkdocs
-      artifacts: true
+  allow_failure: true
   script:
     - mv docs/ public/
   artifacts:
