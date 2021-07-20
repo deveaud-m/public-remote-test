@@ -45,6 +45,10 @@ build_pages:
 
 pages:
   stage: deploy
+  needs:
+    - job: update
+      artifacts: true
+      optional: true
   script:
     - mv docs/ public/
   artifacts:
