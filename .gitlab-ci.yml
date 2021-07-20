@@ -48,7 +48,6 @@ pages:
   needs:
     - job: update
       artifacts: true
-      optional: true
     - job: mkdocs
       artifacts: true
   script:
