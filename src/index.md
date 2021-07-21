@@ -2,4 +2,4 @@
 
 This site is deployed from code.siemens.com.
 
-Wow!
+Using the automatic deployment workflow.
